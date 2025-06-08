@@ -15,5 +15,25 @@ pub struct AlgoApp {
     order_tx: mpsc::UnboundedSender<Order>,
     strategy_tx: mpsc::UnboundedSender<StrategyControl>,
 
+    // UI State 
+    last_market_data: Option<MarketDataUpdate>,
     
+}
+
+impl AlgoApp {
+    pub fn new(
+        market_data_rx: mpsc::UnboundedReceiver<MarketDataUpdate>,
+        oms_rx: mpsc::UnboundedReceiver<OmsUpdate>,
+        order_tx: mpsc::UnboundedSender<Order>,
+        strategy_tx: mpsc::UnboundedSender<StrategyControl>,
+    ) -> Self {
+        Self {
+            market_data_rx,
+            oms_rx,
+            order_tx,
+            strategy_tx,
+            last_market_data: None,
+        }
+
+    }
 }
