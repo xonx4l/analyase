@@ -21,6 +21,18 @@ pub struct AlgoApp {
     oms_log: Vec<String>,
     app_log: Vec<String>,
 
+    //Input fields for manual data entry 
+    input_symbol: String,
+    input_price: String,
+    input_quantity: String,
+    input_side: Side,
+    input_order_type: OrderType,
+    input_tif: TimeInForce,
+
+    strategy_status: String,
+
+    price_history: Vec<[f64;2]>,
+
     
 }
 
@@ -40,6 +52,14 @@ impl AlgoApp {
             orders: Vec::new(),
             oms_log: Vec::new(),
             app_log: Vec::new(),
+            input_symbol: "BTCUSD".to_string(),
+            input_price: "0.0".to_string(),
+            input_quantity: "1.0".to_string(),
+            input_side: Side::Buy,
+            input_order_type: OrderType::Limit,
+            input_tif: TimeInForce::GTC,
+            strategy_status: "Inactive".to_string(),
+            price_history: Vec::new(),
         }
 
     }
