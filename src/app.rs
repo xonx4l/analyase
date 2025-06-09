@@ -82,3 +82,15 @@ fn handle_market_data_updates(&mut self)  {
     }
 
 }
+
+fn handle_oms_updates(&mut self) {
+    while let Ok(update) = self.oms_rx.try_recv() {
+        match update {
+            OmsUpdate::OrderCreated(order) => {
+                self.log_message(format!("Order created {;?} {}, order.side, order.symbol "));
+                self.orders.push.(order);
+            }
+            
+        }
+    }
+}
