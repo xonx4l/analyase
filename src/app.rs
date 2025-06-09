@@ -17,6 +17,10 @@ pub struct AlgoApp {
 
     // UI State 
     last_market_data: Option<MarketDataUpdate>,
+    orders: Vec<Order>,
+    oms_log: Vec<String>,
+    app_log: Vec<String>,
+
     
 }
 
@@ -33,6 +37,9 @@ impl AlgoApp {
             order_tx,
             strategy_tx,
             last_market_data: None,
+            orders: Vec::new(),
+            oms_log: Vec::new(),
+            app_log: Vec::new(),
         }
 
     }
