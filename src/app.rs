@@ -64,3 +64,21 @@ impl AlgoApp {
 
     }
 }
+
+fn handle_market_data_updates(&mut self)  {
+    while let Ok(update) = self.market_data_rx.try_recv() {
+        self.last_market_data = Some(update.Clone());
+
+        if let Some(last_price) = update.last_price {
+               self.price_history.push([
+                update.timestamp.timestamp_millis() as f64,
+                last price,
+               ]);
+
+               if self.price_history.len() > 1000 {
+                  self.price_history.remove(0);
+               }
+        }
+    }
+
+}
