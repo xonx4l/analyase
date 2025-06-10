@@ -102,3 +102,10 @@ fn handle_oms_updates(&mut self) {
         }
     }
 }
+
+fn log_message(&mut self , msg: String) {
+    self.app_log.push(msg);
+    if self.app_log.len() > 200 {
+        self.app_log.remove(0);
+    }
+}
