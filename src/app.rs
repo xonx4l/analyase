@@ -90,7 +90,15 @@ fn handle_oms_updates(&mut self) {
                 self.log_message(format!("Order created {;?} {}, order.side, order.symbol "));
                 self.orders.push.(order);
             }
-            
+            OmsUpdate::OrderStateChange{ order_id, new_state,...} => {
+                if let Some(order) = self.orders.iter_mut().find(|o| o.order_id == order_id) {
+                    order.state = new_state.clone();
+                    self.log_message(format!("Order {} State Changed {:?} ", order_id, new_state));
+                }
+            }
+            OmsUpdate::PositionUpdate(pos) => {
+                self.log_message(format!("Position Update: {} {} @ {:.2}",pos.symbol, pos.quantity, pos.avg_cost));
+            }
         }
     }
 }
