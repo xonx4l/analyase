@@ -109,3 +109,20 @@ fn log_message(&mut self , msg: String) {
         self.app_log.remove(0);
     }
 }
+
+fn render_market_data_panel(&mut self, ui: &mut egui::Ui) {
+    ui.group(|ui| {
+        ui.heading("Market data & charts");
+
+        if let Some(md) = self.last_market_data {
+            ui.label(format!("Symbol: {}", md.symbol));
+            if let Some(last_price) = md.last_price {
+                ui.label(format!("Last Price : {:.2}", last_price));
+            }
+            ui.label(format!("Time: {}", md.timestamp.format("%H:%M:%S")));
+        } else {
+            ui.Label("waiting for market data...");
+        }
+        ui.add_space(10.0);
+    })
+}
