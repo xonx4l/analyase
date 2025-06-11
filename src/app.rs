@@ -124,5 +124,31 @@ fn render_market_data_panel(&mut self, ui: &mut egui::Ui) {
             ui.Label("waiting for market data...");
         }
         ui.add_space(10.0);
-    })
+
+        if !self.price_history_is_empty() {
+            Plot::new("price_chart")
+             .height(300.0)
+             .data_expect(1.0)
+             .show_axes([true,true])
+             .show_x(true)
+             .show_y(true)
+             .label_formatter(|name , value| {
+               if name = "X" {
+                let timestamp_ms = value.x as i64;
+                let datetime = chrono::DateTime::from_timestamp_millis(timestamp_ms)
+                     .unwrap_or_else(|| chrono::utc::now());
+                format!("{}",datetime.format("%H:%M:%S"))     
+               } else {
+                    format!("{}: {:.2}", name , value.y)
+               }
+             })
+             .legend(Legend::default())
+             .show(ui, |plot_ui|) {
+                let line = Line::new(self.price_history.clone())
+                    .name("Last Price")
+                    .color(Color32::LIGHT_GREEN);
+                plot_ui.line(line);
+             }
+        }
+    });
 }
