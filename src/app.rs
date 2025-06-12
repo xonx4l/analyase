@@ -112,43 +112,46 @@ fn log_message(&mut self , msg: String) {
 
 fn render_market_data_panel(&mut self, ui: &mut egui::Ui) {
     ui.group(|ui| {
-        ui.heading("Market data & charts");
+        ui.heading("Market Data & Chart");
 
-        if let Some(md) = self.last_market_data {
+        if let Some(md) = &self.last_market_data {
             ui.label(format!("Symbol: {}", md.symbol));
             if let Some(last_price) = md.last_price {
-                ui.label(format!("Last Price : {:.2}", last_price));
+                ui.label(format!("Last Price: {:.2}", last_price));
             }
             ui.label(format!("Time: {}", md.timestamp.format("%H:%M:%S")));
         } else {
-            ui.Label("waiting for market data...");
+            ui.label("Waiting for market data...");
         }
+
         ui.add_space(10.0);
 
-        if !self.price_history_is_empty() {
+        if !self.price_history.is_empty() {
             Plot::new("price_chart")
-             .height(300.0)
-             .data_expect(1.0)
-             .show_axes([true,true])
-             .show_x(true)
-             .show_y(true)
-             .label_formatter(|name , value| {
-               if name = "X" {
-                let timestamp_ms = value.x as i64;
-                let datetime = chrono::DateTime::from_timestamp_millis(timestamp_ms)
-                     .unwrap_or_else(|| chrono::utc::now());
-                format!("{}",datetime.format("%H:%M:%S"))     
-               } else {
-                    format!("{}: {:.2}", name , value.y)
-               }
-             })
-             .legend(Legend::default())
-             .show(ui, |plot_ui|) {
-                let line = Line::new(self.price_history.clone())
-                    .name("Last Price")
-                    .color(Color32::LIGHT_GREEN);
-                plot_ui.line(line);
-             }
+                .height(300.0) 
+                .data_aspect(1.0) 
+                .show_axes([true, true])
+                .show_x(true)
+                .show_y(true)
+                .label_formatter(|name, value| {
+                    if name == "X" {
+                        let timestamp_ms = value.x as i64;
+                        let datetime = chrono::DateTime::from_timestamp_millis(timestamp_ms)
+                            .unwrap_or_else(|| chrono::Utc::now()); 
+                        format!("{}", datetime.format("%H:%M:%S"))
+                    } else {
+                        format!("{}: {:.2}", name, value.y)
+                    }
+                })
+                .legend(Legend::default()) 
+                .show(ui, |plot_ui| {
+                    let line = Line::new(self.price_history.clone())
+                        .name("Last Price")
+                        .color(Color32::LIGHT_GREEN);
+                    plot_ui.line(line);
+                });
+        } else {
+            ui.label("No price data for chart yet.");
         }
     });
 }
