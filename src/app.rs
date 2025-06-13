@@ -167,3 +167,9 @@ fn render_market_entry_panel(&mut self, ui: &mut egui::Ui) {
     });
    })
 }
+
+fn render_order_table(&mut self , ui: &mut egui::Ui){
+    ui.group(|ui|{
+        ui.heading("Current Orders");
+    })
+}
