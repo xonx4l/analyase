@@ -155,3 +155,15 @@ fn render_market_data_panel(&mut self, ui: &mut egui::Ui) {
         }
     });
 }
+
+fn render_market_entry_panel(&mut self, ui: &mut egui::Ui) {
+   ui.group(|ui| {
+    ui.heading("Manual order entry");
+    ui.add_space(5.0);
+
+    ui.horizontal(|ui|{
+        ui.label("Symbol:");
+        ui.text_edit_single_line(&mut self.input_symbol)
+    });
+   })
+}
