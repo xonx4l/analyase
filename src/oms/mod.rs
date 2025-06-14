@@ -16,4 +16,8 @@ pub enum OmsUpdate{
         new_state; OrderState,
         timestamp: chrono::DateTime::<chrono::Utc>,
     },
+    PositionUpdate(Position),
+}
+
+pub async fn run_oms(){   
 }
