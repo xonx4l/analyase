@@ -165,6 +165,16 @@ fn render_market_entry_panel(&mut self, ui: &mut egui::Ui) {
         ui.label("Symbol:");
         ui.text_edit_single_line(&mut self.input_symbol)
     });
+
+    ui.horizontal(|ui| {
+        ui.label("Price:");
+        ui.text_edit_single_line(&mut self.input_price)
+    });
+    ui.horizontal(|ui {
+        ui.label("Quantity:");
+        ui.text_edit_single_line(&mut self.input_quantity)
+    });
+    ui_add_space(5.0);
    })
 }
 
