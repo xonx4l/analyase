@@ -181,5 +181,11 @@ fn render_market_entry_panel(&mut self, ui: &mut egui::Ui) {
 fn render_order_table(&mut self , ui: &mut egui::Ui){
     ui.group(|ui|{
         ui.heading("Current Orders");
+        ScrollArea::vertical().max_height(200.0).show(ui, |ui|{
+            egui::Grid::new("orders_grid")
+               .num_columns(8)
+               .spacing([20.0, 4.0])
+               .striped(true)
+        })
     })
 }
