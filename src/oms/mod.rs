@@ -19,5 +19,13 @@ pub enum OmsUpdate{
     PositionUpdate(Position),
 }
 
-pub async fn run_oms(){   
+pub async fn run_oms(
+    mut ui_order_rx: mpsc::UnboundedReceiver<Order>,
+    oms_ui_tx: mpsc::UnboundedSender<OmsUpdate>,
+) -> Result<()> {
+   info!("Order Management System (OMS) started.");
+
+   let orders: Arc<RwLock<HashMap<uuid::Uuid, FullOrder>>> = Arc::new(RwLock::new(HashMap::new()));
+   let position_manager = Arc::new(RwLock::new(PositionManager::new()));
+
 }
