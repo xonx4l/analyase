@@ -201,7 +201,6 @@ fn render_order_table(&mut self , ui: &mut egui::Ui){
                    for order in &self.orders{
                        ui.label(order.order_id.simple().to_string());
                        ui.label(&order.symbol);
-                       ui.label()
                        ui.label(format!("{:?}", order.side));
                        ui.label(format!("{:?}", order.order_type));
                        ui.label(format!("{:.2}", order.quantity));
@@ -210,7 +209,12 @@ fn render_order_table(&mut self , ui: &mut egui::Ui){
                        ui.label(format!("{:?}", order.state));
                        ui.end_row();
                    }
-               })
-        })
-    })
+                   if self.orders.is_empty(){
+                      ui.label("No active orders ." )
+                      ui.end_row();
+                   }
+                   
+               });
+        });
+    });
 }
