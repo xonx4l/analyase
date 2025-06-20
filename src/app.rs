@@ -186,6 +186,18 @@ fn render_order_table(&mut self , ui: &mut egui::Ui){
                .num_columns(8)
                .spacing([20.0, 4.0])
                .striped(true)
+               .show(ui, |ui|{
+                   ui.strong("ID");
+                   ui.strong("Symbol");
+                   ui.strong("Side");
+                   ui.strong("Time");
+                   ui.strong("Qty");
+                   ui.strong("Price");
+                   ui.strong("Tif");
+                   ui.strong("Status");
+                   ui.end_row();
+                   
+               })
         })
     })
 }
