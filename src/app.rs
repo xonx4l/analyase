@@ -197,6 +197,19 @@ fn render_order_table(&mut self , ui: &mut egui::Ui){
                    ui.strong("Status");
                    ui.end_row();
                    
+
+                   for order in &self.orders{
+                       ui.label(order.order_id.simple().to_string());
+                       ui.label(&order.symbol);
+                       ui.label()
+                       ui.label(format!("{:?}", order.side));
+                       ui.label(format!("{:?}", order.order_type));
+                       ui.label(format!("{:.2}", order.quantity));
+                       ui.label(format!("{:.2}", order.price.unwrap_or(0.0)));
+                       ui.label(format!("{:?}", order.tif));
+                       ui.label(format!("{:?}", order.state));
+                       ui.end_row();
+                   }
                })
         })
     })
