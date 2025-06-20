@@ -218,3 +218,16 @@ fn render_order_table(&mut self , ui: &mut egui::Ui){
         });
     });
 }
+
+fn render_app_log_panel(&mut self, ui: &mut egui::ui){
+    ui.group(|ui|{
+        ui.heading("Application Log");
+        ScrollArea::vertical().max_height(200.0).show(ui, |ui|{
+            ui.vertical(|ui|{
+                for entry in self.app_log.iter.rev(){
+                    ui.label(entry);
+                }
+            });
+        });
+    });
+}
