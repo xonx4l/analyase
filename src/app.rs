@@ -231,3 +231,7 @@ fn render_app_log_panel(&mut self, ui: &mut egui::ui){
         });
     });
 }
+
+impl App for AlgoApp{
+   // todo
+}
