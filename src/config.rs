@@ -14,3 +14,8 @@ pub struct StrategyConfig {
     pub name: String,
     pub mean_reversion_threshold: f64,
 }
+
+pub struct AppConfig {
+    pub market_data: MarketDataConfig,
+    pub strategy: StrategyConfig,
+}
