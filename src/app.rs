@@ -243,6 +243,25 @@ impl App for AlgoApp{
       CentralPanel::default().show(ctx , |ui| {
            ui.heading("Dashboard");
            ui.add_space(10.0);
-      })
+
+           egui::Grid::new("main_dashboard_grid")
+               .num_columns(2)
+               .spacing([20.0, 20.0])
+               .show(ui, |ui| {
+
+                ui.vertical(|ui| {
+                    self.render_market_data_panel(ui);
+                    ui.add_space(10.0);
+                    self.render_order_entry_panel(ui);
+                });
+
+                ui.vertical(|ui| {
+                    self.render_orders_table(ui);
+                    ui.add_space(10.0);
+                    self.render_app_log_panel(ui);
+                });
+                ui.end_row();
+               });
+      });
    }
 }
