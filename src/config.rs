@@ -10,5 +10,7 @@ pub struct MarketDataConfig{
 
 #[derive(Debug, Deserialize, Serialize, Clone)]
 pub struct StrategyConfig {
-    
+    pub enabled: bool,
+    pub name: String,
+    pub mean_reversion_threshold: f64,
 }
