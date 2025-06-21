@@ -19,3 +19,7 @@ pub struct AppConfig {
     pub market_data: MarketDataConfig,
     pub strategy: StrategyConfig,
 }
+
+pub struct DataManage{
+    
+}
