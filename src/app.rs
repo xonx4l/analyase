@@ -233,5 +233,16 @@ fn render_app_log_panel(&mut self, ui: &mut egui::ui){
 }
 
 impl App for AlgoApp{
-   // todo
+   fn update(&mut self, ctx: &Context, _frame: &mut eframe::Frame ) {
+
+      self.handle_market_data_updates();
+      self.handle_oms_updates();
+
+      ctx.request_repaint();
+
+      CentralPanel::default().show(ctx , |ui| {
+           ui.heading("Dashboard");
+           ui.add_space(10.0);
+      })
+   }
 }
