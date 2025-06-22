@@ -20,6 +20,16 @@ pub struct AppConfig {
     pub strategy: StrategyConfig,
 }
 
-pub struct DataManage{
-    
+impl  AppConfig {
+    pub fn load() -> Result<Self> {
+        let config_path = Path::new("Config.toml");
+        if !config_path_exists() {
+
+            let default_config = Self::default();
+            let toml_string = toml::to_string_pretty(&default_config)?;
+            std::fs::write(config_path, toml_string)?;
+            tracing::warn!("Config.toml not found ,created a default one");
+            return Ok(default_config);
+        }
+    }
 }
