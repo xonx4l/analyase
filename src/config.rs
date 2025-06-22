@@ -29,7 +29,14 @@ impl  AppConfig {
             let toml_string = toml::to_string_pretty(&default_config)?;
             std::fs::write(config_path, toml_string)?;
             tracing::warn!("Config.toml not found ,created a default one");
-            return Ok(default_config);
+            return Ok(default_config);     
         }
+
+        let settings = Config::builder()
+            .add_source(File::new("Config.toml". FileFormat::Toml))
+            .build()?;
+
+        let app_config: AppConfig =  settings.try_deserialize()?;
+        Ok(app_config)    
     }
 }
