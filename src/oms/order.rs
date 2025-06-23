@@ -29,3 +29,19 @@ pub struct FullOrder {
     pub exchange_order_id: Option<String>,
     pub rejection_reason: Option<String>,
 }
+
+impl FullOrder {
+    pub fn from(ui_order: Ui_Order) -> Self {
+        Self {
+            order: ui_order.clone(),
+            current_state: ui_order.state,
+            filled_quantity: 0.0,
+            avg_fill_price: 0.0,
+            last_fill_price: None,
+            last_fill_quantity: None,
+            last_fill_time: None,
+            exchange_order_id: None,
+            rejection_reason: None,
+        }
+    }
+}
