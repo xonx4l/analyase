@@ -39,4 +39,18 @@ impl  AppConfig {
         let app_config: AppConfig =  settings.try_deserialize()?;
         Ok(app_config)    
     }
+
+    pub fn default() -> Self {
+    Self {
+        market_data: MarketDataConfig {
+            websocket_url:"".to_string(),
+            symbols: vec!["BTCUSD".to_string(), "ETHUSD".to_string()],
+        },
+        strategy: StrategyConfig {
+             enabled: true,
+             name: "MeanReversion".to_string(),
+             mean_reversion_threshold: 0.005,
+        }
+    }
+    }
 }
