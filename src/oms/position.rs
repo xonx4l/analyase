@@ -32,3 +32,7 @@ impl Position {
         }
     }
 }
+
+pub struct PositionManager {
+    positions: HashMap<String, Position>,
+}
