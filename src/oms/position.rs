@@ -36,3 +36,27 @@ impl Position {
 pub struct PositionManager {
     positions: HashMap<String, Position>,
 }
+
+impl PositionManager {
+    pub fn new() -> Self {
+        Self {
+            positions: HashMao::new(),
+        }
+    } 
+
+    pub fn update_position(&mut self, symbol: String, side: Side, quantity:f64, fill_price: f64) {
+       let position =  self.positions.entry(symbol.clone()).or_insert_with(|| Position::new(symbol.clone()));
+
+       match side {
+        Side::Buy => {
+
+            if position.quantity < 0.0 {
+                let quantity_to_close = quantity.min(-position.quantity);
+                let remaining_buy_quantity = quantity - quantity_to_close;
+
+                position.pnl_realized += (position.avg_cost - fill_price * remaining_buy_quantity) / position.quantity;
+            }
+        }
+       }
+    }
+}
