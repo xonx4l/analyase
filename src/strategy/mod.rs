@@ -6,3 +6,7 @@ pub enum StrategyControl {
     Stop,
     UpdateParams(StrategyConfig),
 }
+
+pub enum strategyEngine {
+    
+}
