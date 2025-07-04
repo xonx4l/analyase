@@ -27,7 +27,11 @@ pub async fn run_strategy_engine(
                  StrategyControl::Stop => {
                     is_running = false;
                     info!("Strategy Engine received Stop command.");
-                 }
+                 },
+                 StrategyControl::UpdateParams(new_config) => {
+                    config = new_config;
+                    info!("Strategy Engine parameters updated: {:?}", config);
+                 },
               }
           }
         }
