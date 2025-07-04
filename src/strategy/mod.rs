@@ -18,7 +18,18 @@ pub async fn run_strategy_engine(
 
     loop{
         tokio::select! {
-
+          Some (control_msg) = control_rx.recv() => {
+              match control_msg {
+                 StrategyControl::Start => {
+                     is_running = true;
+                     info!(" Strategy Engine received Start command.");
+                 },
+                 StrategyControl::Stop => {
+                    is_running = false;
+                    info!("Strategy Engine received Stop command.");
+                 }
+              }
+          }
         }
     }
 }
