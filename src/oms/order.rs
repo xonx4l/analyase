@@ -1,10 +1,15 @@
+// src/oms/order.rs
 use serde::{Deserialize, Serialize};
 use chrono::{DateTime, Utc};
-use uuid::Uuid;
+use uuid::Uuid; // Keep this, as Uuid is used in struct definitions
 
-use crate::data_model::{OrderType, Side, TimeInForce, Order as UiOrder};
+// Removed unused imports: OrderType, Side, TimeInForce are used within UiOrder struct,
+// so they're implicitly "used" via the UiOrder definition.
+use crate::data_model::Order as UiOrder;
 
-#[derive(Debug, Clone, PartialEq, Serialize , Deserialize )]
+
+/// Represents the possible states of an order in the OMS.
+#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
 pub enum OrderState {
     New,
     PendingNew,
@@ -17,12 +22,13 @@ pub enum OrderState {
     Expired,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize , Deserialize )]
+/// Represents the full, internal state of an order within the OMS.
+#[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct FullOrder {
     pub order: UiOrder,
     pub current_state: OrderState,
-    pub filled_quantity:f64,
-    pub avg_fill_price:f64,
+    pub filled_quantity: f64,
+    pub avg_fill_price: f64,
     pub last_fill_price: Option<f64>,
     pub last_fill_quantity: Option<f64>,
     pub last_fill_time: Option<DateTime<Utc>>,
@@ -31,7 +37,7 @@ pub struct FullOrder {
 }
 
 impl FullOrder {
-    pub fn from(ui_order: Ui_Order) -> Self {
+    pub fn from(ui_order: UiOrder) -> Self {
         Self {
             order: ui_order.clone(),
             current_state: ui_order.state,
@@ -43,5 +49,9 @@ impl FullOrder {
             exchange_order_id: None,
             rejection_reason: None,
         }
+    }
+
+    pub fn update_state(&mut self, new_state: OrderState) {
+        self.current_state = new_state;
     }
 }
