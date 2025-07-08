@@ -1,0 +1,8 @@
+[market_data]
+websocket_url = "wss://stream.binance.com:9443/ws/btcusdt@trade" 
+symbols = ["BTCUSD", "ETHUSD"]
+
+[strategy]
+enabled = true
+name = "MeanReversion"
+mean_reversion_threshold = 0.005
