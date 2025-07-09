@@ -4,7 +4,9 @@ AN TRADING EXECUTION SYSTEM IN RUST.
 
 To Run Follow these steps -:
 
-cargo build 
+cargo build ,
 cargo run 
 
-![Alt text](https://file%252B.vscode-resource.vscode-cdn.net/Users/sumit/Desktop/Screenshot%25202025-07-09%2520at%252012.44.14%25E2%2580%25AFPM.png?version%253D1752045835865)
+<img width="1440" alt="Screenshot 2025-07-09 at 12 44 14 PM" src="https://github.com/user-attachments/assets/4c6849c9-0468-469d-ad31-7f7f22acbfb5" />
+
+
