@@ -1,6 +1,6 @@
 use serde::{Deserialize, Serialize};
 use chrono::{DateTime, Utc};
-use uuid::Uuid; 
+use uuid::Uuid;
 
 #[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
 pub enum Side {
@@ -12,25 +12,13 @@ pub enum Side {
 pub enum OrderType {
     Market,
     Limit,
-
 }
 
 #[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
 pub enum TimeInForce {
     GTC, 
-    IOC,
+    IOC, 
 }
-
-#[derive(Debug, Clone, Serialize, Deserialize)]
-pub struct Candlestick {
-    pub timestamp: chrono::DateTime<chrono::Utc>,
-    pub open: f64,
-    pub high: f64,
-    pub low: f64,
-    pub close: f64,
-    pub volume: f64,
-}
-
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct MarketDataUpdate {
@@ -45,6 +33,16 @@ pub struct MarketDataUpdate {
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
+pub struct Candlestick {
+    pub timestamp: chrono::DateTime<chrono::Utc>,
+    pub open: f64,
+    pub high: f64,
+    pub low: f64,
+    pub close: f64,
+    pub volume: f64,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct Order {
     pub order_id: Uuid,
     pub client_order_id: String, 
@@ -55,7 +53,7 @@ pub struct Order {
     pub price: Option<f64>, 
     pub tif: TimeInForce,
     pub placed_at: DateTime<Utc>,
-    pub state: crate::oms::OrderState, 
+    pub state: crate::oms::order::OrderState, 
 }
 
 impl Order {
@@ -79,7 +77,7 @@ impl Order {
             price,
             tif,
             placed_at: Utc::now(),
-            state: crate::oms::OrderState::New, 
+            state: crate::oms::order::OrderState::New, 
         }
     }
 }

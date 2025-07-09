@@ -1,4 +1,3 @@
-
 mod app;
 mod config;
 mod data_model;
@@ -33,7 +32,7 @@ async fn main() -> anyhow::Result<()> {
     let app_state = AlgoApp::new(md_rx, oms_rx, ui_order_tx, ui_strategy_tx);
 
     eframe::run_native(
-        "Rust Algo Execution System (Initial UI)",
+        "Analyase",
         native_options,
         Box::new(|_cc| Box::new(app_state)),
     )

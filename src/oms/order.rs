@@ -1,14 +1,10 @@
-// src/oms/order.rs
 use serde::{Deserialize, Serialize};
 use chrono::{DateTime, Utc};
-use uuid::Uuid; // Keep this, as Uuid is used in struct definitions
+use uuid::Uuid; 
 
-// Removed unused imports: OrderType, Side, TimeInForce are used within UiOrder struct,
-// so they're implicitly "used" via the UiOrder definition.
 use crate::data_model::Order as UiOrder;
 
 
-/// Represents the possible states of an order in the OMS.
 #[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
 pub enum OrderState {
     New,
@@ -22,7 +18,6 @@ pub enum OrderState {
     Expired,
 }
 
-/// Represents the full, internal state of an order within the OMS.
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct FullOrder {
     pub order: UiOrder,

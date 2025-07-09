@@ -11,7 +11,7 @@ use anyhow::Result;
 use crate::data_model::Order;
 pub use crate::oms::order::{OrderState, FullOrder};
 use crate::oms::position::PositionManager;
-use crate::oms::position::Position; 
+use crate::oms::position::Position;
 
 #[derive(Debug, Clone)]
 pub enum OmsUpdate {
@@ -32,7 +32,6 @@ pub async fn run_oms(
 
     let orders: Arc<RwLock<HashMap<uuid::Uuid, FullOrder>>> = Arc::new(RwLock::new(HashMap::new()));
     let position_manager = Arc::new(RwLock::new(PositionManager::new()));
-
 
     loop {
         tokio::select! {
@@ -62,7 +61,6 @@ pub async fn run_oms(
 
                         info!("Simulating fill for order {}: {:?}", order_id, order_to_execute.current_state); 
 
-                        // Update positions
                         position_manager_clone.write().update_position(
                             order_to_execute.order.symbol.clone(),
                             order_to_execute.order.side.clone(),
